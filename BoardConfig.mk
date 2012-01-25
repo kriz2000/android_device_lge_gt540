@@ -1,0 +1,68 @@
+USE_CAMERA_STUB := false
+
+BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_LIBRPC := true
+
+#podstawowe informacje
+TARGET_BOARD_PLATFORM := msm7k
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv6-vfp
+TARGET_CPU_ABI := armeabi-v6l
+TARGET_CPU_ABI2 := armeabi
+TARGET_BOOTLOADER_BOARD_NAME := swift
+
+
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RECOVERY := true
+TARGET_NO_RADIOIMAGE := true
+
+TARGET_PROVIDES_LIBAUDIO := true
+TARGET_PROVIDES_LIBRIL := true
+TARGET_PROVIDES_INIT_TARGET_RC := true
+
+#aktywacja sensorów
+BOARD_VENDOR_USE_AKMD := akm8973
+TARGET_SENSORS_NO_OPEN_CHECK := true
+TARGET_USES_OLD_LIBSENSORS_HAL := true
+TARGET_WANTS_OLD_ACTIVATE_BEHAVIOR := true
+
+#aktywacja wifi
+BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+WPA_SUPPLICANT_VERSION := VER_0_5_X
+BOARD_WLAN_DEVICE := bcm4325
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wireless.ko"
+WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wl/rtecdc.bin nvram_path=/system/etc/wl/nvram.txt"
+WIFI_DRIVER_MODULE_NAME := wireless
+WIFI_DRIVER_FW_STA_PATH := "/system/etc/wl/rtecdc.bin"
+WIFI_DRIVER_FW_AP_PATH := "/system/etc/wl/rtecdc-apsta.bin"
+WIFI_DRIVER_HAS_LGE_SOFTAP := true
+
+#optymalizacja
+WITH_JIT := true
+ENABLE_JSC_JIT := true
+JS_ENGINE := v8
+
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+
+
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00500000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0f500000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x08a80000
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+#lokalizacja gotowego kernela
+TARGET_PREBUILT_KERNEL := device/lge/gt540/kernel
+
+BUILD_PV_VIDEO_ENCODERS := true
+USE_PV_WINDOWS_MEDIA := false
+BUILD_WITH_FULL_STAGEFRIGHT := true
+
+BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+### GT540
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun"
+BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
+
+
