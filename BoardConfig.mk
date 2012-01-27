@@ -66,3 +66,19 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun"
 BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
 
 
+BOARD_EGL_CFG := device/lge/gt540/files/egl.cfg
+
+
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+
+
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+
+# Enabled For HW Video Decoding
+TARGET_OVERLAY_ALWAYS_DETERMINES_FORMAT := true
+TARGET_SF_NEEDS_REAL_DIMENSIONS := true
+#TARGET_USE_SOFTWARE_AUDIO_AAC := true
+
+KERNEL_MODULES_DIR := /system/lib/modules
+

@@ -125,6 +125,46 @@ PRODUCT_COPY_FILES += \
 	device/lge/gt540/proprietary/lib/omx/libOmxWmaDec.so:system/lib/libOmxWmaDec.so \
 	device/lge/gt540/proprietary/lib/omx/libOmxWmvDec.so:system/lib/libOmxWmvDec.so 
 
+
+# Bluetooth
+PRODUCT_COPY_FILES += \
+	device/lge/gt540/proprietary/bluetooth/BCM4325D1_004.002.004.0262.0270.hcd:system/bin/BCM4325D1_004.002.004.0262.0270.hcd \
+	device/lge/gt540/proprietary/bluetooth/btld:system/bin/btld
+# Это уже и так создается само, и с нужными параметрами
+#	device/lge/gt540/proprietary/bluetooth/bluetooth/audio.conf:system/etc/bluetooth/audio.conf \
+#	device/lge/gt540/proprietary/bluetooth/bluetooth/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf \
+#	device/lge/gt540/proprietary/bluetooth/bluetooth/blacklist.conf:system/etc/bluetooth/blacklist.conf \
+#	device/lge/gt540/proprietary/bluetooth/bluetooth/input.conf:system/etc/bluetooth/input.conf \
+#	device/lge/gt540/proprietary/bluetooth/bluetooth/main.conf:system/etc/bluetooth/main.conf
+
+# Wifi
+PRODUCT_COPY_FILES += \
+	device/lge/gt540/files/etc/wl/rtecdc.bin:system/etc/wl/rtecdc.bin \
+	device/lge/gt540/files/etc/wl/rtecdc-apsta.bin:system/etc/wl/rtecdc-apsta.bin \
+	device/lge/gt540/files/etc/wl/nvram.txt:system/etc/wl/nvram.txt \
+	device/lge/gt540/files/etc/wl/rtecdc-mfgtest.bin:system/etc/wl/rtecdc-mfgtest.bin \
+	device/lge/gt540/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+	device/lge/gt540/prebuilt/kernel/modules/wireless.ko:system/lib/modules/wireless.ko \
+	device/lge/gt540/files/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+	device/lge/gt540/prebuilt/kernel/modules/librasdioif.ko:system/lib/modules/librasdioif.ko
+
+# HW
+PRODUCT_COPY_FILES += \
+	device/lge/gt540/proprietary/lib/lights.swift.so:system/lib/hw/lights.swift.so \
+#	device/lge/gt540/proprietary/lib/sensors.swift.so:system/lib/hw/sensors.swift.so
+
+# Hardware properties 
+PRODUCT_COPY_FILES += \
+	frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
+	frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+	frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+	frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+	frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+	frameworks/base/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml
+#	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml
+
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_BRAND := LGE
 PRODUCT_NAME := gt540
