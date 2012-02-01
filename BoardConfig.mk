@@ -4,81 +4,95 @@ BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_LIBRPC := true
 
-#podstawowe informacje
+
+TARGET_NO_RADIOIMAGE := true
+TARGET_NO_RECOVERY := true
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_KERNEL := true
+
 TARGET_BOARD_PLATFORM := msm7k
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
-TARGET_ARCH := arm
+TARGET_CPU_ABI := armeabi
 TARGET_ARCH_VARIANT := armv6-vfp
-TARGET_CPU_ABI := armeabi-v6l
-TARGET_CPU_ABI2 := armeabi
+TARGET_BOARD_PLATFORM := msm7k
+TARGET_CPU_ABI := armeabi
 TARGET_BOOTLOADER_BOARD_NAME := swift
 
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RECOVERY := true
-TARGET_NO_RADIOIMAGE := true
+BOARD_KERNEL_CMDLINE :=  mem=214M console=ttyMSM2,115200n8 androidboot.hardware=swift
+BOARD_KERNEL_BASE := 0x00200000
+BOARD_PAGE_SIZE := 0x00000800
 
-TARGET_PROVIDES_LIBAUDIO := true
-TARGET_PROVIDES_LIBRIL := true
-TARGET_PROVIDES_INIT_TARGET_RC := true
-
-#aktywacja sensorów
-BOARD_VENDOR_USE_AKMD := akm8973
-TARGET_SENSORS_NO_OPEN_CHECK := true
-TARGET_USES_OLD_LIBSENSORS_HAL := true
-TARGET_WANTS_OLD_ACTIVATE_BEHAVIOR := true
-
-#aktywacja wifi
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION := VER_0_5_X
-BOARD_WLAN_DEVICE := bcm4325
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wireless.ko"
-WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wl/rtecdc.bin nvram_path=/system/etc/wl/nvram.txt"
-WIFI_DRIVER_MODULE_NAME := wireless
-WIFI_DRIVER_FW_STA_PATH := "/system/etc/wl/rtecdc.bin"
-WIFI_DRIVER_FW_AP_PATH := "/system/etc/wl/rtecdc-apsta.bin"
-WIFI_DRIVER_HAS_LGE_SOFTAP := true
-
-#optymalizacja
-WITH_JIT := true
-ENABLE_JSC_JIT := true
-JS_ENGINE := v8
-
-TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
-
-
+# fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00500000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0f500000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x08a80000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-#lokalizacja gotowego kernela
 TARGET_PREBUILT_KERNEL := device/lge/gt540/kernel
 
-BUILD_PV_VIDEO_ENCODERS := true
-USE_PV_WINDOWS_MEDIA := false
-BUILD_WITH_FULL_STAGEFRIGHT := true
+BOARD_HAS_NO_SELECT_BUTTON := true
+
+TARGET_PROVIDES_LIBAUDIO := true
+TARGET_PROVIDES_LIBRIL := true
+TARGET_PROVIDES_INIT_TARGET_RC := true
+
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
+
+# to enable the GPS HAL
+BOARD_USES_QCOM_GPS := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := swift
+# AMSS version to use for GPS
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+
+BOARD_EGL_CFG := device/lge/gt540/configs/egl.cfg
+
+
+
+BOARD_WLAN_DEVICE := bcm4325
+WIFI_DRIVER_FW_STA_PATH         := "/system/etc/wl/rtecdc.bin"
+WIFI_DRIVER_FW_AP_PATH          := "/system/etc/wl/rtecdc-apsta.bin"
+WIFI_DRIVER_MODULE_NAME         := "wireless"
+WIFI_DRIVER_MODULE_PATH         := "/system/lib/modules/wireless.ko"
+WIFI_DRIVER_MODULE_ARG          := "firmware_path=/etc/wl/rtecdc.bin nvram_path=/etc/wl/nvram.txt config_path=/data/misc/wifi/config"
+WPA_SUPPLICANT_VERSION          := VER_0_6_X
+WIFI_DRIVER_HAS_LGE_SOFTAP      := true
+BOARD_WEXT_NO_COMBO_SCAN       := true
+BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+
+BOARD_HAVE_FM_RADIO := true
+BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
+
+TARGET_OTA_ASSERT_DEVICE := swift,gt540
 
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 ### GT540
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun"
 BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
 
+#Aktywacja sensorów
+BOARD_VENDOR_USE_AKMD := akm8973
+TARGET_SENSORS_NO_OPEN_CHECK := true
+TARGET_USES_OLD_LIBSENSORS_HAL := true
+TARGET_WANTS_OLD_ACTIVATE_BEHAVIOR := true
 
-BOARD_EGL_CFG := device/lge/gt540/files/egl.cfg
-
-
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
-
-
+#enable 2d
+BOARD_NO_RGBX_8888 := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 
-# Enabled For HW Video Decoding
-TARGET_OVERLAY_ALWAYS_DETERMINES_FORMAT := true
-TARGET_SF_NEEDS_REAL_DIMENSIONS := true
-#TARGET_USE_SOFTWARE_AUDIO_AAC := true
+JS_ENGINE := v8
 
-KERNEL_MODULES_DIR := /system/lib/modules
+
+#bionic: Add NASTY_PTHREAD_CREATE_HACK
+#This is a workaround for bad linkage of proprietary libs on certain devices.
+BOARD_USE_NASTY_PTHREAD_CREATE_HACK := true
+
+#TARGET_ELECTRONBEAM_FRAMES := 10
+TARGET_DO_NOT_SETS_CAN_DRAW := true
+
+
+
+
 

@@ -6,6 +6,11 @@ $(call inherit-product, device/common/gps/gps_eu_supl.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
+PRODUCT_PACKAGES += copybit.swift
+
+# Extra DS overlay
+DEVICE_PACKAGE_OVERLAYS += device/lg/swift/overlay
+
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
 	brcm_patchram_plus \
@@ -15,7 +20,7 @@ PRODUCT_PACKAGES += \
 	gadget_id \
 	sensors.swift \
 	gps.swift \
-#	lights.swift \
+#	lights.swift 
 
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
@@ -27,8 +32,8 @@ endif
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
-PRODUCT_SKIP_THEMES := true
-PRODUCT_SKIP_WALLPAPERS := true
+#PRODUCT_SKIP_THEMES := true
+#PRODUCT_SKIP_WALLPAPERS := true
 
 # Board-specific init
 PRODUCT_COPY_FILES += device/lge/gt540/files/init.swift.rc:root/init.swift.rc
@@ -51,6 +56,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/lge/gt540/proprietary/lib/gralloc.swift.so:system/lib/hw/gralloc.swift.so \
 	device/lge/gt540/proprietary/lib/gralloc.default.so:system/lib/hw/gralloc.default.so
+#	device/lge/gt540/proprietary/lib/copybit.swift.so:system/lib/hw/copybit.swift.so \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -110,20 +116,7 @@ PRODUCT_COPY_FILES += \
 	device/lge/gt540/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
 	device/lge/gt540/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv \
 	device/lge/gt540/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
-	device/lge/gt540/proprietary/lib/libaudioalsa.so:system/lib/libaudioalsa.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxAacEnc.so:system/lib/libOmxAacEnc.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxAacDec.so:system/lib/libOmxAacDec.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxAmrDec.so:system/lib/libOmxAmrDec.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxAmrEnc.so:system/lib/libOmxAmrEnc.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxAmrRtpDec.so:system/lib/libOmxAmrRtpDec.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxEvrcDec.so:system/lib/libOmxEvrcDec.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxEvrcEnc.so:system/lib/libOmxEvrcEnc.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxAacEnc.so:system/lib/libOmxAacEnc.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxMp3Dec.so:system/lib/libOmxMp3Dec.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxQcelp13Enc.so:system/lib/libOmxQcelp13Enc.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxQcelpDec.so:system/lib/libOmxQcelpDec.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxWmaDec.so:system/lib/libOmxWmaDec.so \
-	device/lge/gt540/proprietary/lib/omx/libOmxWmvDec.so:system/lib/libOmxWmvDec.so 
+	device/lge/gt540/proprietary/lib/libaudioalsa.so:system/lib/libaudioalsa.so 
 
 
 # Bluetooth
@@ -164,6 +157,29 @@ PRODUCT_COPY_FILES += \
 	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	frameworks/base/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml
 #	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml
+
+
+# OMX proprietaries
+PRODUCT_COPY_FILES += \
+    device/lge/gt540/proprietary/lib/omx/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxAacDec.so:system/lib/libOmxAacDec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxAmrRtpDec.so:system/lib/libOmxAmrRtpDec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxH264Dec.so:system/lib/libOmxH264Dec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxQcelpDec.so:system/lib/libOmxQcelpDec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxAacEnc.so:system/lib/libOmxAacEnc.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxAmrwbDec.so:system/lib/libOmxAmrwbDec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxMp3Dec.so:system/lib/libOmxMp3Dec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxAmrDec.so:system/lib/libOmxAmrDec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxEvrcDec.so:system/lib/libOmxEvrcDec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxMpeg4Dec.so:system/lib/libOmxMpeg4Dec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxWmaDec.so:system/lib/libOmxWmaDec.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxAmrEnc.so:system/lib/libOmxAmrEnc.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxEvrcEnc.so:system/lib/libOmxEvrcEnc.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxQcelp13Enc.so:system/lib/libOmxQcelp13Enc.so \
+    device/lge/gt540/proprietary/lib/omx/libOmxWmvDec.so:system/lib/libOmxWmvDec.so
+
+SWIFT_WITH_GOOGLE := true
 
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_BRAND := LGE
