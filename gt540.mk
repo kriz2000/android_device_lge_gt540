@@ -49,8 +49,8 @@ PRODUCT_COPY_FILES += \
 	device/lge/gt540/proprietary/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
 	device/lge/gt540/proprietary/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so \
 	device/lge/gt540/proprietary/lib/libgsl.so:system/lib/libgsl.so \
-	device/lge/gt540/prebuilt/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
-	device/lge/gt540/prebuilt/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw 
+	device/lge/gt540/prebuilt/3d/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
+	device/lge/gt540/prebuilt/3d/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw 
 
 # 2D
 PRODUCT_COPY_FILES += \
@@ -60,15 +60,15 @@ PRODUCT_COPY_FILES += \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-	device/lge/gt540/prebuilt/msm_touchscreen.kcm.bin:system/usr/keychars/msm_touchscreen.kcm.bin \
+	device/lge/gt540/prebuilt/keylayout/msm_touchscreen.kcm.bin:system/usr/keychars/msm_touchscreen.kcm.bin \
 	device/lge/gt540/prebuilt/keylayout/msm_touchscreen.kl:system/usr/keylayout/msm_touchscreen.kl \
-	device/lge/gt540/prebuilt/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+	device/lge/gt540/prebuilt/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
 	device/lge/gt540/prebuilt/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
 
 # LGE services
 PRODUCT_COPY_FILES += \
-	device/lge/gt540/proprietary/akmd2:system/bin/akmd2 \
-	device/lge/gt540/proprietary/qmuxd:system/bin/qmuxd 
+	device/lge/gt540/proprietary/lge services/akmd2:system/bin/akmd2 \
+	device/lge/gt540/proprietary/lge services/qmuxd:system/bin/qmuxd 
 
 # RIL
 PRODUCT_COPY_FILES += \
@@ -97,8 +97,8 @@ PRODUCT_COPY_FILES += \
 	device/lge/gt540/proprietary/lib/ril/libril-qcril-hook-oem.so:system/lib/libril-qcril-hook-oem.so \
 	device/lge/gt540/proprietary/lib/ril/libwms.so:system/lib/libwms.so \
 	device/lge/gt540/proprietary/lib/ril/libwmsts.so:system/lib/libwmsts.so \
-	device/lge/gt540/prebuilt/spn-conf.xml:system/etc/spn-conf.xml \
-	device/lge/gt540/prebuilt/rild:system/bin/rild \
+	device/lge/gt540/prebuilt/rild/spn-conf.xml:system/etc/spn-conf.xml \
+	device/lge/gt540/prebuilt/rild/rild:system/bin/rild \
 	device/lge/gt540/proprietary/lib/ril/libril.so:system/lib/libril.so
 
 # Camera proprietaries
@@ -108,13 +108,13 @@ PRODUCT_COPY_FILES += \
 	device/lge/gt540/proprietary/lib/camera/libmmipl.so:system/lib/libmmipl.so 
 
 PRODUCT_COPY_FILES += \
-	device/lge/gt540/prebuilt/apns-conf.xml:system/etc/apns-conf.xml 
+	device/lge/gt540/files/apns-conf.xml:system/etc/apns-conf.xml 
 
 # Audio 
 PRODUCT_COPY_FILES += \
-	device/lge/gt540/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
-	device/lge/gt540/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
-	device/lge/gt540/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv \
+	device/lge/gt540/files/media_profiles.xml:system/etc/media_profiles.xml \
+	device/lge/gt540/files/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
+	device/lge/gt540/files/AudioFilter.csv:system/etc/AudioFilter.csv \
 	device/lge/gt540/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
 	device/lge/gt540/proprietary/lib/libaudioalsa.so:system/lib/libaudioalsa.so 
 
@@ -132,11 +132,11 @@ PRODUCT_COPY_FILES += \
 
 # Wifi
 PRODUCT_COPY_FILES += \
-	device/lge/gt540/files/etc/wl/rtecdc.bin:system/etc/wl/rtecdc.bin \
-	device/lge/gt540/files/etc/wl/rtecdc-apsta.bin:system/etc/wl/rtecdc-apsta.bin \
-	device/lge/gt540/files/etc/wl/nvram.txt:system/etc/wl/nvram.txt \
-	device/lge/gt540/files/etc/wl/rtecdc-mfgtest.bin:system/etc/wl/rtecdc-mfgtest.bin \
-	device/lge/gt540/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+	device/lge/gt540/prebuilt/etc/wl/rtecdc.bin:system/etc/wl/rtecdc.bin \
+	device/lge/gt540/prebuilt/etc/wl/rtecdc-apsta.bin:system/etc/wl/rtecdc-apsta.bin \
+	device/lge/gt540/prebuilt/etc/wl/nvram.txt:system/etc/wl/nvram.txt \
+	device/lge/gt540/prebuilt/etc/wl/rtecdc-mfgtest.bin:system/etc/wl/rtecdc-mfgtest.bin \
+	device/lge/gt540/files/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
 	device/lge/gt540/prebuilt/kernel/modules/wireless.ko:system/lib/modules/wireless.ko \
 	device/lge/gt540/files/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	device/lge/gt540/prebuilt/kernel/modules/librasdioif.ko:system/lib/modules/librasdioif.ko
@@ -178,6 +178,11 @@ PRODUCT_COPY_FILES += \
     device/lge/gt540/proprietary/lib/omx/libOmxEvrcEnc.so:system/lib/libOmxEvrcEnc.so \
     device/lge/gt540/proprietary/lib/omx/libOmxQcelp13Enc.so:system/lib/libOmxQcelp13Enc.so \
     device/lge/gt540/proprietary/lib/omx/libOmxWmvDec.so:system/lib/libOmxWmvDec.so
+
+# SD Card
+PRODUCT_COPY_FILES += \
+    device/lge/gt540/configs/vold.fstab:/system/etc/vold.fstab
+
 
 SWIFT_WITH_GOOGLE := true
 
