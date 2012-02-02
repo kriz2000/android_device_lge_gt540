@@ -1,0 +1,220 @@
+#on fs
+
+#on early-init
+    
+on boot
+
+# BEGIN: 0006607 park.younghyun@lge.com 2010-05-27 
+# ADD 0006607: [LG IME] Add LG IME APK
+# add for XT9 user dictionary
+    mkdir /data/xt9 0777 system system
+    chown system system /data/xt9
+    chmod 0777 /data/xt9
+# END: 0006607 park.younghyun@lge.com 2010-05-27
+
+	chown system radio /dev/rtc1
+	chmod 0660 /dev/rtc1
+	
+	chown system audio /dev/msm_preproc_ctl
+	chmod 0660 /dev/msm_preproc_ctl
+	chown system audio /dev/msm_pcm_dec
+	chmod 0660 /dev/msm_pcm_dec
+
+	chown root root /dev/system_bus_freq
+	chmod 0666 /dev/system_bus_freq
+	chown root root /dev/cpu_dma_latency
+	chmod 0666 /dev/cpu_dma_latency
+	
+	chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
+	chmod 0660 /sys/module/bluetooth_power/parameters/power
+	
+	chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+	chmod 0666 /sys/class/rfkill/rfkill0/type
+	
+	chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+	chmod 0666 /sys/class/rfkill/rfkill0/state
+	
+	chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+	chmod 0660 /proc/bluetooth/sleep/proto
+	
+	chown system system /sys/module/sco/parameters/disable_esco
+	
+	chown bluetooth bluetooth /dev/ttyHS0
+	chmod 0666 /dev/ttyHS0
+	chmod 0666 /dev/msm_snd
+	mkdir /data/misc/hcid 0770 bluetooth bluetooth
+# VIBRATOR
+	chmod 0666 /sys/class/timed_output/vibrator/enable
+	chmod 0666 /sys/class/timed_output/vibrator/amp
+# SENSOR 
+#	chmod 0666 dev/akm8973_aot
+#	chmod 0666 dev/bma150
+	mkdir /data/radio 0770 radio radio
+	
+#Support for touch key calibration
+	chmod 0666 /dev/swift_tssc_cal
+
+   
+#Change owner "composition" in sysfs to enable mass storage only mode 
+# MASS STORAGE ONLY MODE
+	chown root system /sys/devices/platform/msm_hsusb_periphera/composition
+	chmod 0664 /sys/devices/platform/msm_hsusb_periphera/composition
+	
+	chmod 0666 /dev/oncrpc/3000008c:00040000
+	chmod 0666 /dev/oncrpc/3000000e:00060000
+
+# BACKLIGHT
+	chown system system /sys/class/backlight/rt9393/brightness
+	chown system graphics /dev/hw3d
+	chmod 0660 /dev/hw3d
+	chown system graphics /dev/kgsl
+	chmod 0666 /dev/kgsl
+	chmod 0666 /dev/pmem
+	chown system graphics /dev/pmem_gpu
+	chmod 0666 /dev/pmem_gpu
+	chown system graphics /dev/pmem_gpu1
+	chmod 0666 /dev/pmem_gpu1
+	chown system audio /dev/msm_aac
+	chmod 0660 /dev/msm_aac
+	chown system audio /dev/msm_amrnb_in
+	chmod 0660 /dev/msm_amrnb_in
+	chown system audio /dev/msm_amrnb
+	chmod 0660 /dev/msm_amrnb
+	chown system audio /dev/msm_qcelp
+	chmod 0660 /dev/msm_qcelp
+	chown system audio /dev/msm_evrc
+	chmod 0660 /dev/msm_evrc
+	chown system audio /dev/msm_voicememo
+	chmod 0660 /dev/msm_voicememo
+
+	chmod 0666 /dev/graphics/fb0
+# WIFI
+	chown system misc /data/misc/wifi
+	chmod 0771 /data/misc/wifi
+	
+	mkdir /data/misc/wifi/sockets 0770 wifi wifi
+#	mkdir /data/misc/wifi/sockets 0777 root root
+	
+	mkdir /data/disk 0777 system system
+
+# DHCP
+	mkdir /data/misc/dhcp 0777 system system
+
+# Collect ramconsole data
+	copy /proc/last_kmsg /data/dontpanic/last_kmsg
+	chown root log /data/dontpanic/last_kmsg
+	chmod 0640 /data/dontpanic/last_kmsg
+	
+service qmuxd /system/bin/qmuxd
+
+on property:init.svc.hcid=running
+	write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
+
+## BT
+
+# +++ BRCM +++
+# Make sure we startup btld before bluetoothd
+# Set target address to emulator host loopback IF
+# Limit baudrate to 460800 to ensure reliable uart operation
+# // BEGIN : munho.lee@lge.com 2010-07-05
+# // MOD :0007872: [SWIFT MR] [BT] Bluesleep driver setting 
+# service btld /system/bin/logwrapper /system/bin/btld
+service btld /system/bin/logwrapper /system/bin/btld -lpm 1
+# // END : munho.lee@lge.com 2010-07-05
+    user root
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service bluetoothd /system/bin/bluetoothd -n
+    socket bluetooth stream 660 bluetooth bluetooth
+    socket dbus_bluetooth stream 660 bluetooth bluetooth
+    # init.rc does not yet support applying capabilities, so run as root and
+    # let bluetoothd drop uid to bluetooth with the right linux capabilities
+    group bluetooth net_bt_admin misc			
+    disabled			
+
+# service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
+#     user bluetooth
+#    group qcom_oncrpc bluetooth net_bt_admin
+#    disabled
+#    oneshot
+
+# service hcid /system/bin/hcid -s -n -f /etc/bluez/hcid.conf
+#     socket bluetooth stream 660 bluetooth bluetooth
+     socket dbus_bluetooth stream 660 bluetooth bluetooth
+#    # init.rc does not yet support applying capabilities, so run as root and
+#    # let hcid drop uid to bluetooth with the right linux capabilities
+#    group bluetooth net_bt_admin misc
+#    disabled
+
+# service hfag /system/bin/sdptool add --channel=10 HFAG
+#    user bluetooth
+#    group bluetooth net_bt_admin
+#    disabled
+#    oneshot
+
+# service hsag /system/bin/sdptool add --channel=11 HSAG
+#    user bluetooth
+#    group bluetooth net_bt_admin
+#    disabled
+#    oneshot
+# --- BRCM ---
+
+## WIFI
+#service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf #-dd
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf #-dd
+        socket wpa_wlan0 dgram 660 wifi wifi
+        group system wifi inet
+        disabled
+        oneshot
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -B wlan0
+        disabled
+        oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+	disabled
+	oneshot
+
+on property:init.svc.wpa_supplicant=stopped
+	stop dhcpcd_wlan0
+
+#LG_FW_USB
+#service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyGS0 
+#service port-bridge /system/bin/port-bridge /dev/smd0 /dev/ttyHSUSB0
+
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --baudrate 3000000 --patchram /system/bin/BCM4325D1_004.002.004.0262.0270.hcd /dev/ttyHS0
+     user bluetooth
+     group bluetooth net_bt_admin
+     disabled
+     
+#service dhcp-service /system/bin/netcfg eth0 dhcp
+#	oneshot
+
+#service qcom-post-boot /system/bin/sh /init.qcom.post_boot.sh
+#	user root
+#	oneshot
+
+service akmd2 /system/bin/akmd2
+    
+#on property:dev.bootcomplete=1
+#	stop dhcp-service
+#	start dhcp-service
+#	start qcom-post-boot
+	
+#Change the parameters related with vm
+#	write /proc/sys/vm/oom_dump_tasks 1
+#	write /proc/sys/vm/overcommit_memory 0
+#	write /proc/sys/vm/min_free_kbytes 3000
+
+service gadget_id /system/bin/gadget_id
+    user root
+    disabled
+    oneshot
+
+on property:persist.service.adb.enable=1
+    start gadget_id
+
+on property:persist.service.adb.enable=0
+    start gadget_id
