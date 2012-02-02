@@ -1,2 +1,0 @@
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/gt540.mk
