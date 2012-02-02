@@ -67,8 +67,8 @@ PRODUCT_COPY_FILES += \
 
 # LGE services
 PRODUCT_COPY_FILES += \
-	device/lge/gt540/proprietary/lge services/akmd2:system/bin/akmd2 \
-	device/lge/gt540/proprietary/lge services/qmuxd:system/bin/qmuxd 
+	device/lge/gt540/proprietary/lgeservices/akmd2:system/bin/akmd2 \
+	device/lge/gt540/proprietary/lgeservices/qmuxd:system/bin/qmuxd 
 
 # RIL
 PRODUCT_COPY_FILES += \
