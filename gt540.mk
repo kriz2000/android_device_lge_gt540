@@ -9,7 +9,7 @@ $(call inherit-product, build/target/product/full_base.mk)
 PRODUCT_PACKAGES += copybit.swift
 
 # Extra DS overlay
-DEVICE_PACKAGE_OVERLAYS += device/lg/swift/overlay
+DEVICE_PACKAGE_OVERLAYS += device/lge/gt540/overlay
 
 # HAL libs and other system binaries
 PRODUCT_PACKAGES += \
