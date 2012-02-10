@@ -33,7 +33,6 @@ PRODUCT_PACKAGES += \
     bdaddr_read \
     sensors.swift \
     gps.swift \
-    lights.swift \
     gralloc.swift \
     libril.swift \
     liblgdrm
@@ -214,6 +213,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/chargemode/chargerimages/black_bg.rle:root/chargerimages/black_bg.rle \
     $(LOCAL_PATH)/chargemode/chargerlogo:root/sbin/chargerlogo
 
+#HW
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/proprietary/lib/lights.swift.so:system/lib/hw/lights.swift.so
 
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_BRAND := LGE
